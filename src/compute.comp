@@ -14,10 +14,6 @@ layout(set = 0, binding = 1) buffer OutputBuffer{
 
 void main()
 {
-    //grab global ID
-	uint gID = gl_GlobalInvocationID.x;
-
-    //make sure we don't access past the buffer size
-    outputData.outputs[gID] = gID;
-    sourceData.inputs[gID] = gID;
+    uint gID = gl_GlobalInvocationID.x;
+    outputData.outputs[gID] = sourceData.inputs[gID];
 }
