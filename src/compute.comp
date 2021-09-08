@@ -1,0 +1,23 @@
+#version 450
+#extension GL_GOOGLE_include_directive : enable
+
+layout (local_size_x = 256) in;
+
+layout(set = 0, binding = 0) buffer InputBuffer{
+    uint inputs[];
+} sourceData;
+
+layout(set = 0, binding = 1) buffer OutputBuffer{
+    uint outputs[];
+} outputData;
+
+
+void main()
+{
+    //grab global ID
+	uint gID = gl_GlobalInvocationID.x;
+
+    //make sure we don't access past the buffer size
+    outputData.outputs[gID] = gID;
+    sourceData.inputs[gID] = gID;
+}
